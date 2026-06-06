@@ -59,14 +59,14 @@ The application prints two sections to the console:
 The container image is published at:
 
 ```
-https://hub.docker.com/r/turbatdd/ads-cli-app
+https://hub.docker.com/r/dturbat/ads-cli-app
 ```
 
 ### Pull and run from Docker Hub
 
 ```bash
-docker pull turbatdd/ads-cli-app:latest
-docker run --rm turbatdd/ads-cli-app:latest
+docker pull dturbat/ads-cli-app:latest
+docker run --rm dturbat/ads-cli-app:latest
 ```
 
 ---
