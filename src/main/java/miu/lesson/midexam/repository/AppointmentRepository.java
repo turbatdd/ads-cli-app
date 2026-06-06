@@ -24,9 +24,9 @@ public class AppointmentRepository {
         return dbContext.getAppointments();
     }
 
-    public Appointment findById(int appointmentId) {
+    public Appointment findById(String appointmentId) {
         return dbContext.getAppointments().stream()
-                .filter(a -> a.getId() == appointmentId)
+                .filter(a -> a.getId().equals(appointmentId))
                 .findFirst()
                 .orElse(null);
     }

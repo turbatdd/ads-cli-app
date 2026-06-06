@@ -85,19 +85,19 @@ public class DBContext {
         LocalDate today = LocalDate.now();
 
         appointments.add(new Appointment(
-                1, LocalDate.of(2026, 2, 28), LocalTime.of(10, 5),
+                "1", LocalDate.of(2026, 2, 28), LocalTime.of(10, 5),
                 today, p1, d1, s1, AppointmentStatus.CONFIRMED));
 
         appointments.add(new Appointment(
-                2, LocalDate.of(2025, 12, 31), LocalTime.of(13, 45),
+                "2", LocalDate.of(2025, 12, 31), LocalTime.of(13, 45),
                 today, p2, d2, s1, AppointmentStatus.CONFIRMED));
 
         appointments.add(new Appointment(
-                3, LocalDate.of(2027, 5, 4), LocalTime.of(14, 0),
+                "3", LocalDate.of(2027, 5, 4), LocalTime.of(14, 0),
                 today, p3, d1, s1, AppointmentStatus.CONFIRMED));
 
         appointments.add(new Appointment(
-                4, LocalDate.of(2026, 9, 16), LocalTime.of(11, 15),
+                "4", LocalDate.of(2026, 9, 16), LocalTime.of(11, 15),
                 today, p4, d2, s1, AppointmentStatus.CONFIRMED));
     }
 }

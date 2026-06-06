@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class Appointment {
     private static final DateTimeFormatter TIME_FMT = DateTimeFormatter.ofPattern("hh:mm a");
 
-    private int id;
+    private String id;
     private LocalDate appointmentDate;
     private LocalTime appointmentTime;
     private LocalDate bookingDate;
@@ -19,7 +19,7 @@ public class Appointment {
     private Dentist dentist;
     private Surgery surgery;
 
-    public Appointment(int id, LocalDate appointmentDate, LocalTime appointmentTime,
+    public Appointment(String id, LocalDate appointmentDate, LocalTime appointmentTime,
                        LocalDate bookingDate, Patient patient, Dentist dentist,
                        Surgery surgery, AppointmentStatus status) {
         this.id              = id;
@@ -32,7 +32,7 @@ public class Appointment {
         this.status          = status;
     }
 
-    public int getId()                       { return id; }
+    public String getId()                     { return id; }
     public LocalDate getAppointmentDate()    { return appointmentDate; }
     public LocalTime getAppointmentTime()    { return appointmentTime; }
     public LocalDate getBookingDate()        { return bookingDate; }
