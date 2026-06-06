@@ -1,9 +1,15 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group = 'miu.lesson.midexam'
 version = '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 repositories {
     mavenCentral()
@@ -16,6 +22,22 @@ dependencies {
     implementation 'org.json:json:20231013'
 }
 
+application {
+    mainClass = 'miu.lesson.midexam.ADSAppMain'
+}
+
 test {
     useJUnitPlatform()
+}
+
+// Fat/uber JAR — bundles all runtime dependencies into a single executable JAR
+jar {
+    archiveFileName = 'ads-cli-app.jar'
+    manifest {
+        attributes 'Main-Class': 'miu.lesson.midexam.ADSAppMain'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

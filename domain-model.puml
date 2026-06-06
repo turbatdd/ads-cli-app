@@ -1,0 +1,98 @@
+@startuml ADS_Domain_Model
+
+skinparam classAttributeIconSize 0
+skinparam classFontSize 13
+skinparam classFontStyle bold
+skinparam ArrowColor #333333
+skinparam ClassBorderColor #336699
+skinparam ClassBackgroundColor #EEF4FF
+skinparam ClassHeaderBackgroundColor #336699
+skinparam ClassFontColor #FFFFFF
+skinparam NoteBackgroundColor #FFFDE7
+skinparam NoteBorderColor #F9A825
+skinparam Padding 5
+skinparam Ranksep 80
+skinparam Nodesep 60
+
+title ADS Dental Appointment Management System\nDomain Model Class Diagram
+
+enum AppointmentStatus {
+    BOOKED
+    CANCELLED
+    COMPLETED
+}
+
+class Address {
+    - street    : String
+    - city      : String
+    - state     : String
+    - zipCode   : String
+}
+
+class Patient {
+    - id            : String
+    - firstName     : String
+    - lastName      : String
+    - phoneNumber   : String
+    - email         : String
+    - dateOfBirth   : LocalDate
+    --
+    + getAge()      : int
+}
+
+class Dentist {
+    - id              : String
+    - firstName       : String
+    - lastName        : String
+    - specialization  : String
+}
+
+class Surgery {
+    - id                : String
+    - name              : String
+    - telephoneNumber   : String
+}
+
+class Appointment {
+    - id                : int
+    - appointmentDate   : LocalDate
+    - appointmentTime   : LocalTime
+    - status            : AppointmentStatus
+}
+
+class Bill {
+    - id        : String
+    - amount    : double
+    - dueDate   : LocalDate
+    - paid      : boolean
+    --
+    + isPaid()  : boolean
+}
+
+' ── Compositions (Address is part of Patient / Surgery) ──
+Patient        "1" *-down- "1"    Address         : mailingAddress >
+Surgery        "1" *-down- "1"    Address         : locationAddress >
+
+' ── Appointment associations ──
+Appointment    "0..*" -left-> "1"   Patient         : < booked by
+Appointment    "0..*" -right-> "1"  Dentist         : < assigned to
+Appointment    "0..*" -up-> "1"     Surgery         : < held at
+Appointment    --> AppointmentStatus : uses >
+
+' ── Bill associations ──
+Bill           "0..*" -left-> "1"   Patient         : > belongs to
+Bill           "0..1" -right-> "1"  Appointment     : > for
+
+note bottom of Dentist
+  <b>Constraint:</b> A Dentist may NOT be
+  booked for more than <b>5 appointments</b>
+  within any given week.
+end note
+
+note bottom of Bill
+  <b>Constraint:</b> A Patient with an unpaid
+  Bill older than <b>12 months</b> cannot
+  book a new Appointment.
+end note
+
+@enduml
