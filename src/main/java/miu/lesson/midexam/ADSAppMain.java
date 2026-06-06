@@ -2,7 +2,9 @@ package miu.lesson.midexam;
 
 import miu.lesson.midexam.model.Appointment;
 import miu.lesson.midexam.service.AppointmentService;
+import miu.lesson.midexam.service.ReportService;
 import miu.lesson.midexam.service.impl.AppointmentServiceImpl;
+import miu.lesson.midexam.service.impl.ReportServiceImpl;
 import miu.lesson.midexam.util.JSONUtil;
 
 import java.time.LocalDate;
@@ -11,6 +13,7 @@ import java.util.List;
 public class ADSAppMain {
     public static void main(String[] args) {
         AppointmentService appointmentService = new AppointmentServiceImpl();
+        ReportService     reportService     = new ReportServiceImpl();
 
         System.out.println("=================================================================");
         System.out.println("     ADS Dental Appointment Management System                    ");
@@ -22,11 +25,11 @@ public class ADSAppMain {
 
         System.out.println("\n=================================================================");
 
-        LocalDate today = LocalDate.now();
-        int nextQ = appointmentService.getNextQuarterNum();
-        int nextQYear = appointmentService.getNextQuarterYear();
-        LocalDate start = appointmentService.getNextQuarterStart();
-        LocalDate end = appointmentService.getNextQuarterEnd();
+        LocalDate today    = LocalDate.now();
+        int       nextQ    = reportService.getNextQuarterNum();
+        int       nextQYear = reportService.getNextQuarterYear();
+        LocalDate start    = reportService.getNextQuarterStart();
+        LocalDate end      = reportService.getNextQuarterEnd();
 
         System.out.printf("%n--- 4.2.2: Quarterly Upcoming Appointments (sorted by Date/Time ASC) ---%n");
         System.out.printf("    Today: %s  |  Next Quarter: Q%d %d  [%s to %s]%n%n",
